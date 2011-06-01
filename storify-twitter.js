@@ -41,7 +41,7 @@ jQuery(document).ready(function($) {
             window.open(target, 'storify_this', windowSettings);
           }
         });
-      elem.find('.tweet-actions').prepend(storifyAction);
+      elem.find('.tweet-actions').append(storifyAction);
     }
   });
 });
