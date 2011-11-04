@@ -1,5 +1,6 @@
 var SFY = {
-	base_url: 'http://storify.com',
+  base_url: 'http://storify.com',
+  // base_url: 'http://localhost.storify.com:3000',
 	appname: 'storifychrome'
 
 	/**

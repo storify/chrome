@@ -17,31 +17,11 @@ function storifyThis(info, tab) {
     text = text.toString().substr(0,500).replace(/\n|\r/g,' ');
   }
 
-  var importUrl = baseUrl+'/import?appname=' + appname
-                + '&permalink=' + strictEncodeURIComponent(permalink)
-                + '&text=' + strictEncodeURIComponent(text)
-                + '&title=' + strictEncodeURIComponent(title)
-                + '&favicon=' + strictEncodeURIComponent(favicon);
+  chrome.tabs.executeScript(null,
+                             {code:"document.getElementsByTagName('body')[0].setAttribute('storify_importPermalink','"+permalink+"');"});
 
-  chrome.windows.get(tab.windowId, function(window) {
-    var w = 460,
-        h = 580,
-        sh = window.height,
-        sw = window.width,
-        top = 0;
-    var left = Math.round((sw/2)-(w/2));
-    if (sh > h) {
-      top = Math.round((sh/2)-(h/2))
-    }
-    chrome.windows.create({
-      'url': importUrl,
-      'type': 'popup',
-      'width': w,
-      'height': h,
-      'top': top,
-      'left': left
-    });
-  });
+  chrome.tabs.executeScript(null,
+                             {code:"(function() { _my_script=document.createElement('SCRIPT'); _my_script.type='text/javascript'; _my_script.src='"+baseUrl+"/public/js/storifythispage.js'; document.getElementsByTagName('head')[0].appendChild(_my_script);})()"});
 }
 
 var storifyImage = chrome.contextMenus.create({
