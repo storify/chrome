@@ -1,18 +1,34 @@
 {
-  "background_page": "background.html",
+  "name": "Storify",
   "description": "Official Storify.com Chrome Extension - make social media stories",
+  "version": "0.4.0",
+  "minimum_chrome_version": "5.0",
+  "permissions": [ "tabs", "*://*/*", "contextMenus" ],
+  "background_page": "background.html",
   "icons": {
-    "16":  "storify-this.ico",
-    "32":  "storify-icon-32.png",
-    "48":  "storify-icon-48.png",
-    "128": "storify-icon.png"
+    "16":  "img/storify-this.ico",
+    "32":  "img/storify-icon-32.png",
+    "48":  "img/storify-icon-48.png",
+    "128": "img/storify-icon.png"
   },
-  "content_scripts": [{
-    "matches": ["*://*/*"],
-    "js": ["storify.js"]
-  }],
- "minimum_chrome_version": "5.0",
- "name": "Storify Extension",
- "permissions": [ "contextMenus", "tabs", "*://*.storify.com/", "*://*/*" ],
- "version": "0.3.0"
+  "browser_action": {
+    "default_title": "Storify this page",
+    "default_icon": "img/storify-icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": [
+        "js/jquery.js",
+        "js/jquery.pm.js",
+        "js/jquery.spin.js"
+      ]
+    },
+    {
+      "matches": ["http://*.twitter.com/*", "https://*.twitter.com/*"],
+      "js": [
+        "js/storify-twitter.js"
+      ]
+    }
+  ]
 }
