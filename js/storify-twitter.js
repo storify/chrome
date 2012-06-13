@@ -1,16 +1,18 @@
-var tweetTemplate = $('#tweetTemplate')
-  , $iframe = null
-  , loading = false;
-
 var css = $('<link rel="stylesheet" type="text/css">');
 css.attr('href', chrome.extension.getURL('css/storify-twitter.css'));
 css.appendTo('head');
 
 function addButtons() {
-  $('.tweet').not('.storify-added').each(function(i, tweet) {
+  var sel = '.tweet';
+  if (window.location.href.match('/status/')) {
+    sel = '.permalink-tweet';
+  }
+  $(sel).not('.storify-added').each(function(i, tweet) {
     var $tweet = $(tweet)
       , $actions = $tweet.find('.tweet-actions')
-      , $action = $actions.find('.action-reply-container').clone();
+      , $action = $actions.find('.action-reply-container').first().clone();
+
+    console.log($action);
 
     $tweet.addClass('storify-added');
 
@@ -20,7 +22,7 @@ function addButtons() {
       .removeClass('js-action-reply')
       .addClass('js-action-storify')
       .removeAttr('data-modal')
-      .attr('title', 'Storify')
+      .attr('title', 'Storify');
 
     $action.find('i')
       .removeClass()
@@ -29,62 +31,20 @@ function addButtons() {
     $action.find('b').text('Storify');
 
     $action.click(clicked);
-
     $actions.find('.action-fav-container').after($action);
   });
 }
 
 function clicked(e) {
-  if (loading) return;
-
-  loading = true;
-  $('body').spin({
-      className: 'storify-spinner'
-    , length: 30
-    , width: 5
-    , radius: 30
-    , hwaccel: true
-  });
-
-
   var $target = $(e.target)
-    , $details = $target.parents('.content').find('.details')
-    , permalink = 'http://twitter.com' + $details.attr('href');
+    , $tweet = $target.parents('.tweet')
+    , permalink = 'http://twitter.com/' + $tweet.attr('data-screen-name') +
+                  '/status/' + $tweet.attr('data-item-id');
 
-  $iframe = $('<iframe>');
-  $iframe
-    .attr('src', 'http://localhost.storify.com:3000/import?url=' + permalink)
-    .attr('id', 'storify_overlay')
-    .attr('allowtransparency', true)
-    // .attr('scrolling', 'no')
-    .css({ visibility: 'hidden' })
-    .appendTo('body');
-
-  $iframe.load(function(e) {
-    $iframe.css({ visibility: 'visible' });
-    loading = false;
-    $('body').spin(false);
-  });
+  sfy.showModal({ permalink: permalink });
 }
 
-function closeFrame() {
-  if ($iframe) {
-    $iframe.remove();
-  }
-}
-
-$.receiveMessage(function(message) {
-  console.log('chrome', message);
-  try {
-    var data = JSON.parse(message.data);
-  } catch(e) { return; }
-
-  console.log('chrome', data);
-  switch (data.method) {
-    case 'close': return closeFrame();
-  }
-});
-
+addButtons();
 setInterval(function() {
   addButtons();
 }, 500);

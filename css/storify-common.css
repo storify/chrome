@@ -1,0 +1,14 @@
+#storify_overlay {
+  /*overflow: hidden;*/
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: none;
+  z-index: 999999;
+}
+
+.storify-spinner {
+  position: fixed !important;
+}

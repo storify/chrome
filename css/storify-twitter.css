@@ -1,18 +1,3 @@
-#storify_overlay {
-  /*overflow: hidden;*/
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  border: none;
-  z-index: 999999;
-}
-
-.storify-spinner {
-  position: fixed !important;
-}
-
 .sm-storify, .hover .sm-storify,
 .opened-tweet .sm-storify {
   width: 13px !important;
@@ -26,5 +11,15 @@
 }
 
 .opened-tweed .sm-storify, .opened-tweet.hover .sm-storify {
+  background-position: 0 0 !important;
+}
+
+.permalink-tweet .sm-storify {
+  width: 16px !important;
+  height: 16px !important;
+  background-image: url('../img/storify-twitter-16.png') !important;
+}
+
+.permalink-tweet:hover .sm-storify {
   background-position: 0 0 !important;
 }

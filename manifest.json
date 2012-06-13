@@ -19,15 +19,22 @@
     {
       "matches": ["*://*/*"],
       "js": [
-        "js/jquery.js",
-        "js/jquery.pm.js",
-        "js/jquery.spin.js"
+        "js/support/jquery.js",
+        "js/support/jquery.pm.js",
+        "js/support/jquery.spin.js",
+        "js/storify-common.js"
       ]
     },
     {
       "matches": ["http://*.twitter.com/*", "https://*.twitter.com/*"],
       "js": [
         "js/storify-twitter.js"
+      ]
+    },
+    {
+      "matches": ["http://*.facebook.com/*", "https://*.facebook.com/*"],
+      "js": [
+        "js/storify-facebook.js"
       ]
     }
   ]
