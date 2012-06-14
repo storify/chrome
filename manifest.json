@@ -36,6 +36,12 @@
       "js": [
         "js/storify-facebook.js"
       ]
+    },
+    {
+      "matches": ["http://*.youtube.com/watch*", "https://*.youtube.com/watch*"],
+      "js": [
+        "js/storify-youtube.js"
+      ]
     }
   ]
 }
