@@ -12,8 +12,6 @@ function addButtons() {
       , $actions = $tweet.find('.tweet-actions')
       , $action = $actions.find('.action-reply-container').first().clone();
 
-    console.log($action);
-
     $tweet.addClass('storify-added');
 
     $action.removeClass().addClass('action-storify-container');
