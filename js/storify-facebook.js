@@ -62,15 +62,17 @@ function addButtons() {
 
 function streamElementClicked(e) {
   var $target = $(e.target)
-    , $container = $target.parents('.storyContent, .fbTimelineUnit')
-    , $actorName = $container.find('.actorName a, .passiveName, .primaryActor, .unitHeader a:first')
-    , $timestamp = $container.find('.uiStreamSource, .timelineTimestamp')
-    , $image = $container.find('.uiPhotoThumb img, .uiScaledImageContainer img')
-    , $message = $container.find('.messageBody, .tlTxFe, .pbm');
+    , $container = $target.parents('.storyContent, .fbTimelineUnit, .fbPhotoSnowlift')
+    , $actorName = $container.find('.actorName a, .passiveName, .primaryActor, .unitHeader a:first, .fbPhotoContributorName a')
+    , $timestamp = $container.find('.timestamp, .uiStreamSource, .timelineTimestamp')
+    , $image = $container.find('.uiPhotoThumb img, .uiScaledImageContainer img, .stage .spotlight')
+    , $message = $container.find('.messageBody, .tlTxFe, .pbm, .hasCaption');
 
   var permalink = $timestamp.find('a').attr('href');
-  if (!permalink.match('www.facebook.com')) {
+  if (permalink && !permalink.match('www.facebook.com')) {
     permalink = 'http://www.facebook.com' + permalink;
+  } else if (!permalink) {
+    permalink = window.location.href;
   }
 
   var element = {
