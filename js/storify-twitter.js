@@ -34,6 +34,8 @@ function addButtons() {
 }
 
 function clicked(e) {
+  e.preventDefault();
+  
   var $target = $(e.target)
     , $tweet = $target.parents('.tweet')
     , permalink = 'http://twitter.com/' + $tweet.attr('data-screen-name') +

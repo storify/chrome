@@ -49,6 +49,12 @@
       "js": [
         "js/storify-youtube.js"
       ]
+    },
+    {
+      "matches": ["http://*.reddit.com/*", "https://*.reddit.com/*"],
+      "js": [
+        "js/storify-reddit.js"
+      ]
     }
   ]
 }

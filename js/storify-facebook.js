@@ -61,6 +61,8 @@ function addButtons() {
 }
 
 function streamElementClicked(e) {
+  e.preventDefault();
+
   var $target = $(e.target)
     , $container = $target.parents('.storyContent, .fbTimelineUnit, .fbPhotoSnowlift')
     , $actorName = $container.find('.actorName a, .passiveName, .primaryActor, .unitHeader a:first, .fbPhotoContributorName a')
@@ -105,6 +107,8 @@ function streamElementClicked(e) {
 }
 
 function commentClicked(e) {
+  e.preventDefault();
+  
   var $target = $(e.target)
     , $container = $target.parents('.uiUfiComment')
     , $timestamp = $container.find('.uiLinkSubtle')

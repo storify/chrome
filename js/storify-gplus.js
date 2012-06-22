@@ -55,6 +55,8 @@ function addButtons() {
 }
 
 function clicked(e) {
+  e.preventDefault();
+  
   var $target = $(e.target)
     , $container = $target.parents('.Cg')
     , $actorName = $container.find('.md')
@@ -102,7 +104,8 @@ function clicked(e) {
 }
 
 function commentClicked(e) {
-  console.log(e);
+  e.preventDefault();
+
   var $target = $(e.target)
     , $container = $target.parents('.lp')
     , $actorName = $container.find('.gi')
