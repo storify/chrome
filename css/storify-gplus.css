@@ -1,0 +1,18 @@
+.storify-button span {
+  height: 18px;
+  width: 18px;
+  background: no-repeat url('../img/storify-gplus-18.png');
+  margin-top: 3px;
+}
+
+.storify-button-small {
+  background: no-repeat url('../img/storify-gplus-comment.png');
+}
+
+.storify-button-small:hover {
+  background: no-repeat url('../img/storify-gplus-comment-hover.png');
+}
+
+.storify-button-small:active {
+  background: no-repeat url('../img/storify-gplus-comment-active.png');
+}

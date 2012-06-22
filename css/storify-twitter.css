@@ -10,8 +10,17 @@
   background-position: 0 -13px !important;
 }
 
-.opened-tweed .sm-storify, .opened-tweet.hover .sm-storify {
+.opened-tweed .sm-storify,
+.opened-tweet.hover .sm-storify {
   background-position: 0 0 !important;
+}
+
+.simple-tweet .sm-storify {
+  background-position: 0 -13px !important;
+}
+
+.media-slideshow-tweet .sm-storify {
+  background-position: 0 -26px !important;
 }
 
 .permalink-tweet .sm-storify {

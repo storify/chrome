@@ -22,7 +22,8 @@
         "js/support/jquery.js",
         "js/support/jquery.pm.js",
         "js/support/jquery.spin.js",
-        "js/storify-common.js"
+        "js/storify-common.js",
+        "js/storify-hotkey.js"
       ]
     },
     {
@@ -35,6 +36,12 @@
       "matches": ["http://*.facebook.com/*", "https://*.facebook.com/*"],
       "js": [
         "js/storify-facebook.js"
+      ]
+    },
+    {
+      "matches": ["http://plus.google.com/*", "https://plus.google.com/*"],
+      "js": [
+        "js/storify-gplus.js"
       ]
     },
     {

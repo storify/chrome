@@ -5,7 +5,7 @@ css.appendTo('head');
 function addButtons() {
   var sel = '.tweet';
   if (window.location.href.match('/status/')) {
-    sel = '.permalink-tweet';
+    sel = '.permalink-tweet, .simple-tweet';
   }
   $(sel).not('.storify-added').each(function(i, tweet) {
     var $tweet = $(tweet)

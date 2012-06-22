@@ -1,22 +1,40 @@
+// var head = $('head');
+
 var css = $('<link rel="stylesheet" type="text/css">');
 css.attr('href', chrome.extension.getURL('css/storify-common.css'));
-css.appendTo('head');
+css.prependTo('html');
 
 var sfy = {
   modal: null,
   loading: false,
 
   showModal: function(element) {
-    if (sfy.loading) return;
+    if (sfy.loading || sfy.modal) return;
     sfy.loading = true;
+
+    var overlay = $('<div>');
+    overlay
+      .css({
+          position: 'fixed'
+        , top: 0
+        , left: 0
+        , 'z-index': 999999
+        , width: '100%'
+        , height: '100%'
+        , background: 'rgba(0,0,0,0.8)'
+      })
+      .appendTo('body');
     
-    $('body').spin({
-        className: 'storify-spinner'
-      , length: 30
-      , width: 5
-      , radius: 30
-      , hwaccel: true
-    });
+    if ($.spin) {
+      $('body').spin({
+          className: 'storify-spinner'
+        , length: 10
+        , width: 5
+        , radius: 20
+        , hwaccel: true
+        , color: '#fff'
+      });
+    }
 
     sfy.modal = $('<iframe>');
     sfy.modal
@@ -30,7 +48,10 @@ var sfy = {
     sfy.modal.load(function(e) {
       sfy.modal.css({ visibility: 'visible' });
       sfy.loading = false;
-      $('body').spin(false);
+      if ($.spin) {
+        $('body').spin(false);
+      }
+      overlay.remove();
     });
 
     return sfy.modal;
@@ -39,6 +60,7 @@ var sfy = {
   closeModal: function() {
     if (sfy.modal) {
       sfy.modal.remove();
+      sfy.modal = null;
     }
   }
 
