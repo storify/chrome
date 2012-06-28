@@ -1,3 +1,5 @@
+sfy.getURL = chrome.extension.getURL;
+
 function storifyThis(info, tab) {
   var info = info || {}
     , element = {
