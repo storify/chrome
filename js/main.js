@@ -1,4 +1,5 @@
 sfy.getURL = chrome.extension.getURL;
+sfy.loadCSS('css/storify-common.css');
 
 function storifyThis(info, tab) {
   var info = info || {}
