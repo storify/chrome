@@ -6,67 +6,25 @@
   "permissions": [ "tabs", "*://*/*", "contextMenus" ],
   "background_page": "background.html",
   "icons": {
-    "16":  "shared/img/storify-this.ico",
-    "32":  "shared/img/storify-icon-32.png",
-    "48":  "shared/img/storify-icon-48.png",
-    "128": "shared/img/storify-icon.png"
+    "16":  "img/storify-this.ico",
+    "32":  "img/storify-icon-32.png",
+    "48":  "img/storify-icon-48.png",
+    "128": "img/storify-icon.png"
   },
   "browser_action": {
     "default_title": "Storify this page",
-    "default_icon": "shared/img/storify-icon.png"
+    "default_icon": "img/storify-icon.png"
   },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
       "js": [
-        "shared/js/support/jquery.js",
-        "shared/js/support/jquery.pm.js",
-        "shared/js/support/jquery.spin.js",
-        "shared/js/storify-common.js",
+        "js/support/jquery.js",
+        "js/support/jquery.pm.js",
+        "js/support/jquery.spin.js",
         "js/common.js",
-        "shared/js/storify-hotkey.js"
-      ]
-    },
-    {
-      "matches": ["http://*.twitter.com/*", "https://*.twitter.com/*"],
-      "js": [
-        "shared/js/storify-twitter.js"
-      ]
-    },
-    {
-      "matches": ["http://*.facebook.com/*", "https://*.facebook.com/*"],
-      "js": [
-        "shared/js/storify-facebook.js"
-      ]
-    },
-    {
-      "matches": ["http://plus.google.com/*", "https://plus.google.com/*"],
-      "js": [
-        "shared/js/storify-gplus.js"
-      ]
-    },
-    {
-      "matches": ["http://*.youtube.com/watch*", "https://*.youtube.com/watch*"],
-      "js": [
-        "shared/js/storify-youtube.js"
-      ]
-    },
-    {
-      "matches": ["http://*.reddit.com/*", "https://*.reddit.com/*"],
-      "js": [
-        "shared/js/storify-reddit.js"
-      ]
-    },
-    {
-      "matches": ["http://instagram.com/p/*", "https://instagram.com/p/*"],
-      "js": [
-        "shared/js/storify-instagram.js"
-      ]
-    },
-    {
-      "matches": ["http://*.flickr.com/*", "https://*.flickr.com/*"],
-      "js": [
-        "shared/js/storify-flickr.js"
+        "js/load.js",
+        "js/storify-hotkey.js"
       ]
     }
   ]

@@ -1,0 +1,15 @@
+{
+  "author": "",
+  "name": "chrome",
+  "version": "0.2.2-21-g950accb",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/storify/chrome.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
