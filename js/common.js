@@ -1,6 +1,8 @@
 var sfy = {
   modal: null,
   loading: false,
+  storifyUrl: '//storify.com',
+  // storifyUrl: 'http://localhost.storify.com:3000',
 
   getURL: chrome.extension.getURL,
 
@@ -34,7 +36,7 @@ var sfy = {
 
     sfy.modal = $('<iframe>');
     sfy.modal
-      .attr('src', 'http://staging.storify.com/import?element=' + encodeURIComponent(JSON.stringify(element)))
+      .attr('src', sfy.storifyUrl + '/import?element=' + encodeURIComponent(JSON.stringify(element)))
       .attr('id', 'storify_overlay')
       .attr('allowtransparency', true)
       // .attr('scrolling', 'no')
