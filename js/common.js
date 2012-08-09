@@ -1,8 +1,7 @@
 var sfy = {
   modal: null,
   loading: false,
-  // storifyUrl: 'http://staging.storify.com',
-  storifyUrl: 'http://localhost.storify.com:3000',
+  storifyUrl: '//storify.com',
 
   getURL: chrome.extension.getURL,
 

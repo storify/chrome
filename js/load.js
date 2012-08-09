@@ -1,4 +1,4 @@
 $('body').attr('storify-loaded', 'true');
 
 sfy.loadCSS('css/storify-common.css');
-sfy.loadScript(sfy.storifyUrl + '/public/js/bookmarklet.js');
+sfy.loadScript(sfy.storifyUrl + '/public/js/bookmarklet.js?1.9.0');
