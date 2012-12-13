@@ -1,7 +1,7 @@
 {
   "name": "Storify",
   "description": "Official Storify.com Chrome Extension - create social media stories",
-  "version": "0.7.13",
+  "version": "0.7.0",
   "manifest_version": 2,
   "minimum_chrome_version": "5.0",
   "permissions": [ "tabs", "*://*/*", "contextMenus" ],
