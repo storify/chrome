@@ -1,0 +1,10 @@
+.storify-button {
+  background-image: url('../img/storify-facebook-12.png') !important;
+  padding-left: 14px !important;
+}
+
+.info .storify-button {
+  color: #998 !important;
+  margin-left: 6px !important;
+  padding-top: 2px !important;
+}

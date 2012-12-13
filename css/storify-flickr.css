@@ -1,0 +1,12 @@
+.storify-button {
+  margin-left: 10px;
+}
+
+.storify-button i {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -4px;
+  background: no-repeat url('../img/storify-flickr-16.png');
+}

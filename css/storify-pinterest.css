@@ -1,0 +1,15 @@
+.storify-button {
+  margin-top: 5px !important;
+}
+
+.storify-button em {
+  width: 10px !important;
+  height: 10px !important;
+  background-image: url('../img/storify-pinterest-10.png') !important;
+}
+
+.storify-button-big em {
+  width: 13px !important;
+  height: 13px !important;
+  background-image: url('../img/storify-pinterest-13.png') !important;
+}

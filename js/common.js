@@ -2,7 +2,7 @@ var sfy = {
   modal: null,
   loading: false,
   storifyUrl: '//storify.com',
-
+  fn: [],
   getURL: chrome.extension.getURL,
 
   showModal: function(element) {
@@ -69,7 +69,7 @@ var sfy = {
 
   loadScript: function(path) {
     var script = $('<script>');
-    script.attr('src', path);
+    script.attr('src', sfy.getURL(path));
     script.prependTo('html');
   }
 

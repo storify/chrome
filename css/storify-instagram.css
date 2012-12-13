@@ -1,0 +1,8 @@
+.storify-button .icon {
+  margin-top: -1px;
+}
+
+.storify-button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
