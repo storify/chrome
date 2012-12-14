@@ -3,31 +3,28 @@ sfy.fn['youtube'] = function() {
   sfy.loadCSS('css/storify-youtube.css');
 
   function addButton() {
-    $('#watch-actions').not('.storify-added').each(function(i, container) {
+    $('#watch7-secondary-actions').not('.storify-added').each(function(i, container) {
       var $container = $(container)
-        , $action = $container.find('#watch-like').clone();
+        , $action = $container.find('> span:first-child').clone();
 
       $container.addClass('storify-added');
 
-      $action
-        .attr('id', 'watch-storify')
+      $action.find('button')
         .attr('title', 'Storify this video')
         .removeAttr('data-button-toggle')
-        .removeAttr('data-button-action')
-        .removeClass('start')
+        .removeAttr('data-trigger-for')
+        .removeClass('yt-uix-button-toggled')
         .click(clicked);
 
       $action.find('.yt-uix-button-content')
-        .text('Storify');
+        .text('Storify ');
 
-      $action.find('.yt-uix-button-icon')
-        .removeClass('yt-uix-button-icon-watch-like');
-
-      $container.find('#watch-share').after($action);
+      $container.prepend($action);
     });
   }
 
   function clicked(e) {
+    e.preventDefault();
     sfy.showModal({ permalink: window.location.href });
   }
 
