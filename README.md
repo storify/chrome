@@ -27,10 +27,10 @@ Unpacked Extension
 Features / Description
 -----
 
+- Deep integration with Twitter.com, Facebook.com, YouTUBE.com, Instagram and Topsy which adds a Storify action link to all tweets, posts, videos, images.
 - Rich context menu - right-click and create stories from anywhere on the web.
 - Select text and right-click the selected text to quote the text in your story.
 - Right-click links to Storify the linked page.
-- Deep integration with #newtwitter which adds a Storify action link to all tweets.
 
 
 Issues
@@ -43,6 +43,14 @@ Contributing
 -----
 
 Fork at it.
+
+## Deploying
+(for Storify employees only)
+* Go to https://chrome.google.com/webstore/developer/dashboard
+* Login with the username `chrome@storify.com` 
+* Edit the Storify app
+* Update the new Zip file 
+* Republish the app
 
 
 License
