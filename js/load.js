@@ -15,6 +15,7 @@ var services = {
   , instagram: /https?:\/\/(.*)\.?(instagr\.am|instagram.com)\/p/
   , reddit: /https?:\/\/(.*)\.?reddit\.com/
   , twitter: /https?:\/\/(.*)\.?twitter\.com/
+  , twitterArchive: /file:.*Tweets.*/
   , pinterest: /https?:\/\/(.*)\.?pinterest\.com/
   , youtube: /https?:\/\/(.*)\.?youtube\.com\/watch/
   , topsy: /https?:\/\/(.*)\.?topsy\.com/
