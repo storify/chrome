@@ -1,9 +1,12 @@
+#page-container .sm-storify {
+  background-position: 0 -13px;
+}
+
 .sm-storify, .hover .sm-storify,
 .opened-tweet .sm-storify {
   width: 13px !important;
   height: 13px !important;
   background-image: url('../img/storify-twitter-13.png') !important;
-  background-position: 0 0;
 }
 
 .hover .sm-storify {
@@ -23,12 +26,11 @@
   background-position: 0 -26px !important;
 }
 
+#page-container .permalink-tweet .sm-storify {
+ background-position: 0 -16px;   
+}
 .permalink-tweet .sm-storify {
   width: 16px !important;
   height: 16px !important;
   background-image: url('../img/storify-twitter-16.png') !important;
-}
-
-.permalink-tweet:hover .sm-storify {
-  background-position: 0 0 !important;
 }
