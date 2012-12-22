@@ -5,9 +5,14 @@ var sfy = {
   fn: [],
   getURL: chrome.extension.getURL,
 
-  showModal: function(element) {
+  showModal: function(element, options) {
     if (sfy.loading || sfy.modal) return;
     sfy.loading = true;
+
+    options = options || {};
+    options.utm_medium = 'chrome';
+    options.utm_source = options.utm_source || window.location.hostname || 'unknown';
+    options.utm_content = options.utm_content || element.type || 'unknown';
 
     var overlay = $('<div>');
     overlay
@@ -35,7 +40,7 @@ var sfy = {
 
     sfy.modal = $('<iframe>');
     sfy.modal
-      .attr('src', sfy.storifyUrl + '/import?element=' + encodeURIComponent(JSON.stringify(element)))
+      .attr('src', sfy.storifyUrl + '/import?utm_source='+options.utm_source+'&utm_medium='+options.utm_medium+'&utm_content='+options.utm_content+'&utm_campaign=storify-action&element=' + encodeURIComponent(JSON.stringify(element)))
       .attr('id', 'storify_overlay')
       .attr('allowtransparency', true)
       // .attr('scrolling', 'no')
