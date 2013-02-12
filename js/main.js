@@ -53,6 +53,49 @@ function storifyThis(info, tab) {
   return storifyThisElement(element);
 }
 
+function clog(msg) {
+  chrome.tabs.executeScript(null, {
+    code: 'if(window.console) { console.log("storify> ","'+msg+'"); }'
+  });
+}
+
+// [ryan:2-12-13] might need this later, left here for reference
+// chrome.extension.onMessage.addListener( function(request, sender, sendResponse) {
+//   if (request.event) {
+//     lastElementClicked = request.event;
+//     clog("logged dom element");
+//   }
+//   clog(request.event);
+// });
+
+
+function storifyThisPost(info, tab) {
+  // clog("storifyThisPost ", lastElementClicked);
+
+  chrome.tabs.executeScript(null, {
+    code: 'sfy.storifyThisPost();'
+  });
+  return;
+
+  // [ryan:2-12-13] these are all of the values of info, left here for future reference
+  // clog("mediaType: "+info.mediaType);
+  // clog("linkUrl: "+info.linkUrl);
+  // clog("srcUrl: "+info.srcUrl);
+  // clog("pageUrl: "+info.pageUrl);
+  // clog("frameUrl: "+info.frameUrl);
+  // clog("selectionText: "+info.selectionText);
+  // clog("editable: "+info.editable);
+  // clog("wasChecked: "+info.wasChecked);
+  // clog("checked: "+info.checked);
+};
+
+
+chrome.contextMenus.create({
+  'title':    'Storify This Post',
+  'contexts': ['all'],
+  'onclick':  storifyThisPost
+});
+
 chrome.contextMenus.create({
   'title':    'Storify This Image',
   'contexts': ['image'],

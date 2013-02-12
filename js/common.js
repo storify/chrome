@@ -4,6 +4,11 @@ var sfy = {
   storifyUrl: '//storify.com',
   fn: [],
   getURL: chrome.extension.getURL,
+  lastElementClicked: null,
+
+  storifyThisPost: function() {
+    console.log(this.lastElementClicked);
+  },
 
   showModal: function(element, options) {
     if (sfy.loading || sfy.modal) return;
@@ -79,6 +84,12 @@ var sfy = {
   }
 
 };
+
+var downHandler = function(e) {
+  sfy.lastElementClicked = e;
+};
+
+$(document).mousedown( downHandler );
 
 $.receiveMessage(function(message) {
   try {

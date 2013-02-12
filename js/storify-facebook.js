@@ -170,9 +170,10 @@ sfy.fn['facebook'] = function() {
     sfy.showModal(element);
   }
 
-  addButtons();
-  setInterval(function() {
-    addButtons();
-  }, 500);
+  // [ryan:2-12-13] removing the storify buttons from the facebook page, because they are whiners
+  // addButtons();
+  // setInterval(function() {
+  //   addButtons();
+  // }, 500);
 
 };
