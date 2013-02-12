@@ -6,10 +6,6 @@ var sfy = {
   getURL: chrome.extension.getURL,
   lastElementClicked: null,
 
-  storifyThisPost: function() {
-    console.log(this.lastElementClicked);
-  },
-
   showModal: function(element, options) {
     if (sfy.loading || sfy.modal) return;
     sfy.loading = true;

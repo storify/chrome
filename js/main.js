@@ -73,7 +73,7 @@ function storifyThisPost(info, tab) {
   // clog("storifyThisPost ", lastElementClicked);
 
   chrome.tabs.executeScript(null, {
-    code: 'sfy.storifyThisPost();'
+    code: 'sfy.fn["facebook"].storifyThisPost();'
   });
   return;
 
@@ -88,13 +88,6 @@ function storifyThisPost(info, tab) {
   // clog("wasChecked: "+info.wasChecked);
   // clog("checked: "+info.checked);
 };
-
-
-chrome.contextMenus.create({
-  'title':    'Storify This Post',
-  'contexts': ['all'],
-  'onclick':  storifyThisPost
-});
 
 chrome.contextMenus.create({
   'title':    'Storify This Image',
@@ -118,6 +111,13 @@ chrome.contextMenus.create({
   'title':    'Storify This Selection',
   'contexts': ['selection'],
   'onclick':  storifyThisSelection
+});
+
+chrome.contextMenus.create({
+  'title':    'Storify This Post',
+  'contexts': ['all'],
+  'onclick':  storifyThisPost,
+  'documentUrlPatterns': ['*://*.facebook.com/*']
 });
 
 chrome.browserAction.onClicked.addListener(function(tab) {

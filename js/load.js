@@ -27,6 +27,6 @@ $('body').attr('storify-loaded', 'true');
 
 sfy.loadCSS('css/storify-common.css');
 
-if (!onStorify && service) {
+if (!onStorify && service && service !== 'facebook') {
   sfy.fn[service]();
 }
