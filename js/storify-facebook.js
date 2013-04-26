@@ -289,7 +289,7 @@ sfy.fn['facebook'] = {
     var $target = $(e.target)
       , $container = $target.parents('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
-      , $message = $container.find('.UFICommentContent')
+      , $message = $container.find('.UFICommentContent').children().not('.UFICommentActorName')
       , $actorName = $container.find('.UFICommentActorName')
       , permalink = $timestamp.attr('href');
 
