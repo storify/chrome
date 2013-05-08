@@ -285,11 +285,11 @@ sfy.fn['facebook'] = {
 
   commentClicked: function (e) {
     e.preventDefault();
-    
+    //AM: watch out for these classes names
     var $target = $(e.target)
       , $container = $target.parents('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
-      , $message = $container.find('.UFICommentBody')
+      , $message = $container.find('.UFICommentContent').children().not('.UFICommentActorName')
       , $actorName = $container.find('.UFICommentActorName')
       , permalink = $timestamp.attr('href');
 
