@@ -29,7 +29,7 @@ sfy.fn['pinterest'] = function() {
         , $actions = $container.find('#PinActionButtons')
         , $action = $actions.find('.ZoomLikeButton, .like_pin').clone();
 
-      console.log($container, $actions, $action);
+      // console.log($container, $actions, $action);
       if (!$actions.length || !$action.length) return;
 
       $action

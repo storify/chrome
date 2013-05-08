@@ -13,3 +13,11 @@
   height: 13px !important;
   background-image: url('../img/storify-pinterest-13.png') !important;
 }
+
+.actions .storify-button {
+  display: none;
+}
+
+.pin:hover .storify-button {
+  display: inline-block;
+}
