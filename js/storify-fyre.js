@@ -9,9 +9,13 @@ sfy.fn['fyre'] = function() {
     //after what element we inject storify the whole thing link
     "containerAfter": ".fyre-post-button-new",
     //single item, e.g., comment
-    "item": "",
+    "item": ".fyre-comment-article",
     //after what element we inject storify comment link
-    "itemAfter": ".fyre-comment-reply"
+    "itemAfter": ".fyre-comment-reply",
+    'itemText': '.fyre-comment p',
+    'itemAuthorName': '.fyre-comment-username',
+    'itemAuthorAvatar': '.fyre-user-avatar'
+
   };
   var elements = {
     "container": '<div class="goog-inline-block fyre-button-right fyre-post-button fyre-post-to-storify" title="" role="button" id=":s" style="-webkit-user-select: none;">' +
@@ -25,19 +29,22 @@ sfy.fn['fyre'] = function() {
 
 
   var injectStorifyLinks = function (map, el) {
+    
     //AM: assuming fyre is loaded we use this: https://github.com/Livefyre/livefyre-docs/wiki/JavaScript-API
     $(document).ready(function(){
       // console.log($(map.container))      
+      var $mapContainer = $(map.container);
       var config = { attributes: true, childList: true, characterData: true }
       var observer = new MutationObserver(function(mutations){
         console.log(mutations);
-        if ($(map.container).not('.storify-added').length>0) {
-          $(map.container).addClass('storify-added');
+        if ($mapContainer.not('.storify-added').length>0) {
+          $mapContainer.addClass('storify-added');
           $(map.containerAfter).after(el.container);
           $(el.selector).click(storifyContainer);
           $(map.itemAfter).each(function(index, element){
-            $(element).after(el.item);
-            $(element).next().click(storifyComment);  
+            var $element = $(element);
+            $element.after(el.item);
+            $element.next().click(storifyComment);  
           });        
           // $(map.itemSelector).click(storifyComment);          
         }
@@ -76,7 +83,42 @@ sfy.fn['fyre'] = function() {
 
   var storifyComment = function (e) {
     e.preventDefault();
-    console.log(e.srcElement);
+    var item = $(e.srcElement).parents(mapping.item);
+    var message = item.find(mapping.itemText).text();
+    var id = item.attr('id').match(/fyre\-message\-([0-9]+)/)[1];
+
+    var permalink = window.location.href + '#lf_comment=' + id;
+    var authorName = item.find(mapping.itemAuthorName).text();
+    var authorHref = item.find(mapping.itemAuthorName).attr('href');
+    // var timestamp = item.find(mapping.itemAuthorName).text();
+    var thumbnail = item.find(mapping.itemAuthorAvatar).attr('src');
+    var sourceName = window.location.hostname;
+    // console.log(window.fyre);
+    // var sourceName = window.fyre.conv.config.network;
+    var element = {
+      type: 'quote',
+      data: {
+        quote: {
+          text: message
+        }
+      },
+      permalink: permalink,
+      source: {
+        name: sourceName,
+        href: 'http://' + sourceName
+      },
+      attribution: {
+        name: authorName,
+        href: authorHref,
+        thumbnail: thumbnail
+      }
+      // ,
+      // posted_at: new Date($timestamp.attr('data-utime') * 1000)
+    };
+    console.log(element);
+    sfy.showModal(element);
+
+    // console.log(e.srcElement);
   };
 
   return injectStorifyLinks(mapping, elements);
