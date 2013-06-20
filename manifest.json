@@ -26,6 +26,7 @@
     "css/storify-topsy.css",
     "css/storify-twitter.css",
     "css/storify-youtube.css",
+    "css/storify-fyre.css",
     "img/storify-facebook-12.png",
     "img/storify-facebook-14.png",
     "img/storify-flickr-16.png",
@@ -76,6 +77,7 @@
         "js/storify-topsy.js",
         "js/storify-twitter.js",
         "js/storify-youtube.js",
+        "js/storify-fyre.js",
         "js/load.js"
       ]
     }

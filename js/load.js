@@ -23,6 +23,21 @@ var services = {
 var service = getService(window.location.href)
   , onStorify = window.location.hostname.match(/storify\.com/);
 
+var embeds = {
+  "fyre": ".fyre-widget"
+}
+
+//AM: sometimes Storify is used on embeds, life fyre
+if (!service) {
+  for (var key in embeds) {
+    if ($(embeds[key])) {
+      service = key;
+      break;
+    }
+  }
+}
+console.log(service);
+
 $('body').attr('storify-loaded', 'true');
 
 sfy.loadCSS('css/storify-common.css');
