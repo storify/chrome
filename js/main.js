@@ -68,6 +68,13 @@ function clog(msg) {
 //   clog(request.event);
 // });
 
+function storifyThisComment(info,tab){  
+  chrome.tabs.executeScript(null,{
+    // code: 'sfy.fn["youtube"].test();'
+    code: 'sfy.fn["youtube"].storifyComment(sfy.lastElementClicked);'
+  });
+  return;
+};
 
 function storifyThisPost(info, tab) {
   // clog("storifyThisPost ", lastElementClicked);
@@ -120,7 +127,17 @@ chrome.contextMenus.create({
   'documentUrlPatterns': ['*://*.facebook.com/*']
 });
 
+//AM: YouTube Comments
+chrome.contextMenus.create({
+  'title':    'Storify This Comment',
+  'contexts': ['all'],
+  'onclick':  storifyThisComment,
+  'documentUrlPatterns': ['*://*.youtube.com/*']
+});
+
 chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.connect(tab.id);
   storifyThis(null, tab);
 });
+
+// chrome.contextMenus.onClicked
