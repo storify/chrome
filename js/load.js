@@ -36,7 +36,7 @@ if (!service) {
     }
   }
 }
-console.log(service);
+// console.log(service);
 
 $('body').attr('storify-loaded', 'true');
 
