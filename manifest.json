@@ -61,6 +61,8 @@
     "js/storify-topsy.js",
     "js/storify-twitter.js",
     "js/storify-youtube.js",
+    "js/storify-fyre.js",
+    "js/storify-disqus.js",
     "js/load.js"
   ],
   "content_scripts": [
@@ -82,6 +84,7 @@
         "js/storify-twitter.js",
         "js/storify-youtube.js",
         "js/storify-fyre.js",
+        "js/storify-disqus.js",        
         "js/load.js"
       ]
     }
