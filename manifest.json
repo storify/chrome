@@ -1,10 +1,14 @@
 {
   "name": "Storify",
   "description": "Official Storify.com Chrome Extension - create social media stories",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "manifest_version": 2,
   "minimum_chrome_version": "5.0",
-  "permissions": [ "tabs", "*://*/*", "contextMenus" ],
+  "permissions": [ 
+    "tabs", 
+    "*://*/*", 
+    "contextMenus"
+  ],
   "background": { "page": "background.html" },
   "icons": {
     "16":  "img/storify-this.ico",
@@ -26,6 +30,7 @@
     "css/storify-topsy.css",
     "css/storify-twitter.css",
     "css/storify-youtube.css",
+    "css/storify-fyre.css",
     "img/storify-facebook-12.png",
     "img/storify-facebook-14.png",
     "img/storify-flickr-16.png",
@@ -56,6 +61,8 @@
     "js/storify-topsy.js",
     "js/storify-twitter.js",
     "js/storify-youtube.js",
+    "js/storify-fyre.js",
+    "js/storify-disqus.js",
     "js/load.js"
   ],
   "content_scripts": [
@@ -76,6 +83,8 @@
         "js/storify-topsy.js",
         "js/storify-twitter.js",
         "js/storify-youtube.js",
+        "js/storify-fyre.js",
+        "js/storify-disqus.js",        
         "js/load.js"
       ]
     }
