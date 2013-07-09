@@ -44,13 +44,8 @@ sfy.fn['youtube'] = function() {
     });
   }
 
-  // this.test = function (e) {
-    // console.log(e);
-  // };
-  
   var commentClicked = sfy.fn["youtube"].storifyComment = function (e) {
     if (!e) e = sfy.lastElementClicked;
-    // sfy.lastElementClicked
     // console.log(sfy);
     e.preventDefault();
     
@@ -85,7 +80,6 @@ sfy.fn['youtube'] = function() {
     sfy.showModal(element);
   }
   
-  // = commentClicked;
 
   addButton();
   addCommentStorifyButton();

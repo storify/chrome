@@ -31,7 +31,7 @@
       'itemSelector': '.fyre-comment-storify'
     };
 
-//new MutationObserver(function(m) {console.log('!');}).observe($('.fyre-widget').find('iframe').get(0),{ attributes: true, childList: true, characterData: true })
+
 
     //AM: this function takes care of injecting links, will call it in as the return of this module
     var injectStorifyLinks = function (map, el) {
@@ -84,7 +84,7 @@
     var storifyComment = function (e) {
       e.preventDefault();
       var item = $(e.srcElement).parents(mapping.item);
-      console.log(item.find(mapping.itemText))
+      // console.log(item.find(mapping.itemText))
       var message = item.find(mapping.itemText).first().text();
       var id = item.attr('id').match(/fyre\-message\-([0-9]+)/)[1];
 
