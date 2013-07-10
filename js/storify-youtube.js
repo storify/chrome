@@ -31,7 +31,7 @@ sfy.fn['youtube'] = function() {
       '<span class="yt-uix-button-content">Storify</span>' +
       '</button>';
     $('#watch7-container .comment-actions').not('.storify-added').each(function(index, element) {
-      $(element).find('button[data-action=reply]').after($storifyButton);
+      $(element).find('button[data-action=reply], button[data-upsell=comment]').after($storifyButton);
       $(element).find('button[data-action=storify]').click(commentClicked);
     }).addClass('storify-added');
 
@@ -44,13 +44,8 @@ sfy.fn['youtube'] = function() {
     });
   }
 
-  // this.test = function (e) {
-    // console.log(e);
-  // };
-  
   var commentClicked = sfy.fn["youtube"].storifyComment = function (e) {
     if (!e) e = sfy.lastElementClicked;
-    // sfy.lastElementClicked
     // console.log(sfy);
     e.preventDefault();
     
@@ -85,7 +80,6 @@ sfy.fn['youtube'] = function() {
     sfy.showModal(element);
   }
   
-  // = commentClicked;
 
   addButton();
   addCommentStorifyButton();
