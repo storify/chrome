@@ -17,7 +17,7 @@
       "item": ".fyre-comment-article",
       //after what element we inject storify comment link
       "itemAfter": ".fyre-comment-reply",
-      'itemText': '.fyre-comment p',
+      'itemText': '.fyre-comment-wrapper p:first',
       'itemAuthorName': '.fyre-comment-username',
       'itemAuthorAvatar': '.fyre-user-avatar'
 
@@ -31,7 +31,7 @@
       'itemSelector': '.fyre-comment-storify'
     };
 
-//new MutationObserver(function(m) {console.log('!');}).observe($('.fyre-widget').find('iframe').get(0),{ attributes: true, childList: true, characterData: true })
+
 
     //AM: this function takes care of injecting links, will call it in as the return of this module
     var injectStorifyLinks = function (map, el) {
@@ -84,15 +84,16 @@
     var storifyComment = function (e) {
       e.preventDefault();
       var item = $(e.srcElement).parents(mapping.item);
-      var message = item.find(mapping.itemText).text();
+      // console.log(item.find(mapping.itemText))
+      var message = item.find(mapping.itemText).first().text();
       var id = item.attr('id').match(/fyre\-message\-([0-9]+)/)[1];
 
       var permalink = window.location.href + '#lf_comment=' + id;
-      var authorName = item.find(mapping.itemAuthorName).text();
-      var authorHref = item.find(mapping.itemAuthorName).attr('href');
+      var authorName = item.find(mapping.itemAuthorName).first().text();
+      var authorHref = item.find(mapping.itemAuthorName).first().attr('href');
       //AM: there is no timestamp, only relative human format, e.g. 2 hours
       // var timestamp = item.find(mapping.itemAuthorName).text();
-      var thumbnail = item.find(mapping.itemAuthorAvatar).attr('src');
+      var thumbnail = item.find(mapping.itemAuthorAvatar).first().attr('src');
       var sourceName = window.location.hostname;
       //AM: cannot access page's global scope because Chrome Extension runs in it's own environment, possible with injection of a script tag and posting a message do window (while listeing to a message here)
       // var sourceName = window.fyre.conv.config.network;
