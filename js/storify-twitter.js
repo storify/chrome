@@ -22,9 +22,8 @@ sfy.fn['twitter'] = function() {
         .removeAttr('data-modal')
         .attr('title', 'Storify');
 
-      $action.find('i')
-        .removeClass()
-        .addClass('sm-embed sm-storify');
+      $action.find('span')
+        .addClass('sm-storify');
 
       $action.find('b').text('Storify');
 
