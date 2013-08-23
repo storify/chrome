@@ -1,7 +1,7 @@
 var sfy = {
   modal: null,
   loading: false,
-  storifyUrl: 'http://storify.com',
+  storifyUrl: (window.location.protocol.match(/^http/)) ? window.location.protocol + '//storify.com' : 'http://storify.com',
   fn: [],
   getURL: chrome.extension.getURL,
   lastElementClicked: null,
