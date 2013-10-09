@@ -1,17 +1,13 @@
-.fyre-widget a.fyre-comment-storify {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;  
-  color: #505153 !important;
-font-size: 10px !important;
-font-weight: bold !important;
-padding: 0px !important;
-text-transform: uppercase;
-top: 0px !important;
-text-decoration: none;
--webkit-box-shadow: none;
--moz-box-shadow: none;
-box-shadow: none;
-cursor: pointer;
+a.fyre-storify-link>span {
+  background-image: url('../img/storify-livefyre-16.png') !important;
+  background-position: 0 0 !important;
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+  top: 4px;
+}
+
+a.fyre-storify-link:hover>span {
+  background-position: 0px -16px !important;
 }
 

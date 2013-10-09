@@ -16,7 +16,7 @@
       //single item, e.g., comment
       "item": ".fyre-comment-article",
       //after what element we inject storify comment link
-      "itemAfter": ".fyre-comment-reply",
+      "itemAfter": ".fyre-share-link",
       'itemText': '.fyre-comment-wrapper p:first',
       'itemAuthorName': '.fyre-comment-username',
       'itemAuthorAvatar': '.fyre-user-avatar'
@@ -27,8 +27,8 @@
                       '<div class="goog-inline-block fyre-button-right-outer-box" style="-webkit-user-select: none;">'+
                       '<div class="goog-inline-block fyre-button-right-inner-box" style="-webkit-user-select: none;">Storify</div></div></div>',
       'selector': '.fyre-post-to-storify',
-      'item':'&nbsp;<a class="fyre-comment-storify fyre-comment-action-button">Storify</a>',
-      'itemSelector': '.fyre-comment-storify'
+      'item':'<a class="fyre-storify-link"><span></span>Storify</a>',
+      'itemSelector': '.fyre-storify-link'
     };
 
 
@@ -86,7 +86,7 @@
       var item = $(e.srcElement).parents(mapping.item);
       // console.log(item.find(mapping.itemText))
       var message = item.find(mapping.itemText).first().text();
-      var id = item.attr('id').match(/fyre\-message\-([0-9]+)/)[1];
+      var id = item.data('message-id');
 
       var permalink = window.location.href + '#lf_comment=' + id;
       var authorName = item.find(mapping.itemAuthorName).first().text();
