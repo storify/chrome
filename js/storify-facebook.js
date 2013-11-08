@@ -122,9 +122,11 @@ sfy.fn['facebook'] = {
     var $target = $(e.target)
       , $container = $target.parents('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
-      , $message = $container.find('.UFICommentContent').children().not('.UFICommentActorName')
+      , $message = $container.find('.UFICommentContent').children().not('.UFICommentActorName, :has(.uiStreamAttachments)')
       , $actorName = $container.find('.UFICommentActorName')
-      , permalink = $timestamp.attr('href');
+      , $image = $container.find('.uiMediaThumb img').first()
+      , permalink = $timestamp.attr('href')
+      , message = $message.text();
 
     if (permalink && !permalink.match('www.facebook.com')) {
       permalink = this.facebookSource.href + permalink;
@@ -133,7 +135,7 @@ sfy.fn['facebook'] = {
     var element = {
         type: 'quote'
       , data: {
-            quote: { text: $message.text() }
+            quote: { text: message }
         }
       , permalink: permalink
       , source: this.facebookSource
@@ -144,6 +146,15 @@ sfy.fn['facebook'] = {
         }
       , posted_at: new Date($timestamp.find('abbr').attr('data-utime') * 1000)
     };
+    
+    // Image in comment
+    if ($image.length) {
+      element.type = 'image';
+      element.data.image = {
+          src: $image.attr('src').replace('/p160x160', '')
+        , caption: message
+      };
+    }
 
     if (!element.permalink || !element.data.quote.text) {
       return;
