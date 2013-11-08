@@ -48,7 +48,7 @@ Fork at it.
 (for Storify employees only)
 * Go to https://chrome.google.com/webstore/developer/dashboard
 * Login with the username `chrome@storify.com` 
-* Edit the Storify app
+* Edit the Storify app, and change the version in manifest.json
 * Update the new Zip file 
 * Republish the app
 
