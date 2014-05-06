@@ -53,9 +53,9 @@ sfy.fn['facebook'] = {
     var $container = $target.parents('.storyContent, .fbTimelineUnit, .fbPhotoSnowlift, #fbPhotoPageContainer').first()
       , $inner = $container.find('.uiStreamSubstory').first()
 
-    $container = $inner.length ? $inner.first() : $container;
+    $container = $target.parents("[id*=substream]")
 
-    var $actorName = $container.find('.actorName a, .passiveName, .primaryActor, .unitHeader a:first, .-cx-PRIVATE-fbTimelineUnitActor__header a:first, .fbPhotoContributorName a').first()
+    var $actorName = $container.find("a[data-hovercard]:not(.profileLink):not(.UFICommentActorName)").text() 
       , $timestamp = $container.find('.timestamp, .uiLinkSubtle abbr').first()
       , $image = $container.find('.uiPhotoThumb img, .uiScaledImageContainer img, .stage .spotlight, #fbPhotoImage').first()
       , $message = $container.find('.messageBody, .tlTxFe, .pbm, .hasCaption, .userMessage, .-cx-PRIVATE-fbTimelineText__featured, .userContent').first()
