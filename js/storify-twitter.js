@@ -3,10 +3,8 @@ sfy.fn['twitter'] = function() {
   sfy.loadCSS('css/storify-twitter.css');
 
   function addButtons() {
-    var sel = '.tweet';
-    if (window.location.href.match('/status/')) {
-      sel = '.permalink-tweet, .simple-tweet';
-    }
+    var sel = window.location.href.match('/status/') ? '.permalink-tweet, .simple-tweet' : '.tweet';
+
     $(sel).not('.storify-added').each(function(i, tweet) {
       var $tweet = $(tweet)
         , $actions = $tweet.find('.tweet-actions')
@@ -23,6 +21,7 @@ sfy.fn['twitter'] = function() {
         .attr('title', 'Storify');
 
       $action.find('span')
+        .removeClass('Icon--reply')
         .addClass('sm-storify');
 
       $action.find('b').text('Storify');
