@@ -1,6 +1,6 @@
 sfy.fn['twitter'] = function() {
 
-  sfy.loadCSS('css/storify-twitter.css');
+  sfy.loadCSS('css/storifycons.css');
 
   function addButtons() {
     var sel = window.location.href.match('/status/') ? '.permalink-tweet, .simple-tweet' : '.tweet';
@@ -22,7 +22,8 @@ sfy.fn['twitter'] = function() {
 
       $action.find('span')
         .removeClass('Icon--reply')
-        .addClass('sm-storify');
+        .addClass('storifycon-logo')
+        .css('top', '2px');
 
       $action.find('b').text('Storify');
 
