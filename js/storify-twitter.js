@@ -3,32 +3,33 @@ sfy.fn['twitter'] = function() {
   sfy.loadCSS('css/storifycons.css');
 
   function addButtons() {
-    var sel = window.location.href.match('/status/') ? '.permalink-tweet, .simple-tweet' : '.tweet';
 
-    $(sel).not('.storify-added').each(function(i, tweet) {
+    $('.js-actionable-tweet').not('.storify-added').each(function(i, tweet) {
       var $tweet = $(tweet)
-        , $actions = $tweet.find('.tweet-actions')
-        , $action = $actions.find('.action-reply-container').first().clone();
+        , $actions = $tweet.find('.js-actions')
+        , $action = $actions.children().first().clone();
 
       $tweet.addClass('storify-added');
 
-      $action.removeClass().addClass('action-storify-container');
+      $action.removeClass('action-reply-container ProfileTweet-action--reply')
+        .addClass('action-storify-container');
 
-      $action.find('.js-action-reply')
-        .removeClass('js-action-reply')
+      $action.find('.js-action-reply, .js-actionReply')
+        .removeClass('js-action-reply js-actionReply')
         .addClass('js-action-storify')
         .removeAttr('data-modal')
         .attr('title', 'Storify');
 
-      $action.find('span')
+      $action.find('.Icon--reply')
         .removeClass('Icon--reply')
         .addClass('storifycon-logo')
-        .css('top', '2px');
+        .css({'position': 'relative', 'top': '2px'});
 
       $action.find('b').text('Storify');
 
       $action.click(clicked);
       $actions.find('.action-fav-container').after($action);
+      $actions.find('.ProfileTweet-action--favorite').after($action);
     });
   }
 
@@ -36,7 +37,7 @@ sfy.fn['twitter'] = function() {
     e.preventDefault();
     
     var $target = $(e.target)
-      , $tweet = $target.parents('.tweet')
+      , $tweet = $target.parents('.js-actionable-tweet')
       , permalink = 'http://twitter.com/' + $tweet.attr('data-screen-name') +
                     '/status/' + $tweet.attr('data-item-id');
 
