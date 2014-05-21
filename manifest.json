@@ -22,7 +22,6 @@
   },
   "web_accessible_resources": [
     "css/storify-common.css",
-    "css/storify-facebook.css",
     "css/storify-flickr.css",
     "css/storify-gplus.css",
     "css/storify-instagram.css",
@@ -31,8 +30,6 @@
     "css/storify-twitter.css",
     "css/storify-youtube.css",
     "css/storify-fyre.css",
-    "img/storify-facebook-12.png",
-    "img/storify-facebook-14.png",
     "img/storify-flickr-16.png",
     "img/storify-gplus-18.png",
     "img/storify-gplus-comment-active.png",
