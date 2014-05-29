@@ -5,30 +5,24 @@ sfy.fn['facebook'] = {
   },
 
   storifyThisPost: function() {
-    this.streamElementClicked(sfy.lastElementClicked);
-  },
-
-  streamElementClicked: function(e) {
-    // var self = this;
-    e.preventDefault();
-
+    var $target = $(sfy.lastElementClicked.target);
     // check to see if it's a comment
-    if ($(e.target).parents('.UFIComment').length > 0) {
+    if ($target.parents('.UFIComment').length > 0) {
       // if so, storify the comment, not the post
-      return this.commentClicked(e);
+      return this.commentClicked($target);
     }
 
     // otherwise, comment the post itself
-    return this.storifyThisDomElement($(e.target));
+    return this.storifyThisDomElement($target);
   },
 
   storifyThisDomElement: function($target) {
-    var $container = $target.parents('.storyContent, .fbTimelineUnit, .fbPhotoSnowlift, #fbPhotoPageContainer').first()
+    var $container = $target.parents('[id*=substream], .storyContent, .fbTimelineUnit, .fbPhotoSnowlift, #fbPhotoPageContainer').first()
       , $inner = $container.find('.uiStreamSubstory').first()
 
-    $container = $target.parents("[id*=substream]")
+    $container = $inner.length ? $inner.first() : $container;
 
-    var $actorName = $container.find("a[data-hovercard]:not(.profileLink):not(.UFICommentActorName)").text() 
+    var $actorName = $container.find('.actorName a, .passiveName, .primaryActor, .unitHeader a:first, .-cx-PRIVATE-fbTimelineUnitActor__header a:first, .fbPhotoContributorName a').first()
       , $timestamp = $container.find('.timestamp, .uiLinkSubtle abbr').first()
       , $image = $container.find('.uiPhotoThumb img, .uiScaledImageContainer img, .stage .spotlight, #fbPhotoImage').first()
       , $message = $container.find('.messageBody, .tlTxFe, .pbm, .hasCaption, .userMessage, .-cx-PRIVATE-fbTimelineText__featured, .userContent').first()
@@ -89,11 +83,9 @@ sfy.fn['facebook'] = {
     sfy.showModal(element);
   },
 
-  commentClicked: function (e) {
-    e.preventDefault();
+  commentClicked: function ($target) {
     //AM: watch out for these classes names
-    var $target = $(e.target)
-      , $container = $target.parents('.UFIComment')
+    var $container = $target.parents('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
       , $message = $container.find('.UFICommentContent').children().not('.UFICommentActorName, :has(.uiStreamAttachments)')
       , $actorName = $container.find('.UFICommentActorName')
