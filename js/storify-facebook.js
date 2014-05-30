@@ -4,6 +4,33 @@ sfy.fn['facebook'] = {
     , href: 'http://www.facebook.com'
   },
 
+  addButtons: function() {
+    var self = this;
+    $(document).on('click','a[role=button]', function() {
+      setTimeout(function() {
+        $('a[role=menuitem][ajaxify*="/embed?"]').each(function() {
+          var posturl = $(this).attr('ajaxify').match(/url=([^&]*)/);
+          $(this).removeAttr("ajaxify");
+
+          if(posturl && posturl.length > 0)
+            posturl = unescape(posturl[1]);
+          else
+            return;
+
+          var $target = $('a[href="'+posturl+'"]').first();
+          var li = $(this).parent('li');
+          var clone = $(li).clone();
+          $(clone)
+            .hover(function() { $(this).addClass("_54ne selected") }, function() { $(this).removeClass("_54ne selected") })
+            .find('a').click(function() { self.storifyThisDomElement($target); })
+            .find('span').text('Storify');
+
+          $(li).after(clone);
+        });
+      }, 100);
+    });
+  },
+
   storifyThisPost: function() {
     var $target = $(sfy.lastElementClicked.target);
     // check to see if it's a comment
@@ -127,6 +154,10 @@ sfy.fn['facebook'] = {
 
     sfy.showModal(element);
   }};
+
+setTimeout(function() {
+  sfy.fn['facebook'].addButtons();
+}, 1000);
   
 /*
  * Storify action inline with Share / Comment / ... for all FB posts
@@ -321,5 +352,3 @@ sfy.fn['facebook'] = function() {
 };
 
 */
-
-
