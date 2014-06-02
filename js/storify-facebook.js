@@ -6,7 +6,7 @@ sfy.fn['facebook'] = {
 
   addButtons: function() {
     var self = this;
-    $(document).on('click','a[role=button]', function() {
+    $('#content').on('click','.fbTimelineCurationControl', function() {
       setTimeout(function() {
         $('a[role=menuitem][ajaxify*="/embed?"]').each(function() {
           var posturl = $(this).attr('ajaxify').match(/url=([^&]*)/);
