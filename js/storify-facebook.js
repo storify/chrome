@@ -8,9 +8,9 @@ sfy.fn['facebook'] = {
     var self = this;
     $('#content').on('click','.fbTimelineCurationControl', function() {
       setTimeout(function() {
-        $('a[role=menuitem][ajaxify*="/embed?"]').each(function() {
+        $('._54nc').not('.storify-added').each(function() {
           var posturl = $(this).attr('ajaxify').match(/url=([^&]*)/);
-          $(this).removeAttr("ajaxify");
+          $(this).addClass('storify-added');
 
           if(posturl && posturl.length > 0)
             posturl = unescape(posturl[1]);
@@ -22,7 +22,7 @@ sfy.fn['facebook'] = {
           var clone = $(li).clone();
           $(clone)
             .hover(function() { $(this).addClass("_54ne selected") }, function() { $(this).removeClass("_54ne selected") })
-            .find('a').click(function() { self.storifyThisDomElement($target); })
+            .find('a').removeAttr('ajaxify').click(function() { self.storifyThisDomElement($target); })
             .find('span').text('Storify');
 
           $(li).after(clone);
