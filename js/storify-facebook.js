@@ -13,7 +13,7 @@ sfy.fn['facebook'] = {
           $(this).addClass('storify-added');
 
           if(posturl && posturl.length > 0)
-            posturl = unescape(posturl[1]);
+            posturl = decodeURIComponent(posturl[1]);
           else
             return;
 
