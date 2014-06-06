@@ -1,7 +1,7 @@
 function getDomain(urlstr) {
   if(!urlstr) return '';
-  var domain = urlstr.replace(/^(https?:\/\/)(www\.)?/i,'');
-  return domain.replace(/\/.*/g,'');
+  var domain = urlstr.replace(/^(https?:\/\/)(www\.)?/i,'').replace(/\/.*/g,'');
+  return domain === 'twitter.com' ? 'twitter' : domain;
 }
 
 function storifyThisElement(element) {
