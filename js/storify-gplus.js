@@ -8,49 +8,32 @@ sfy.fn['gplus'] = function() {
   };
 
   function addButtons() {
-    $('.BE').not('.storify-added').each(function(i, container) {
-      var $container = $(container)
-        , $action = $container.find('.Tj:first').clone();
+    $('body').on('click','.xw', function() {
+      setTimeout(function() {
+        $('.YH').not('.storify-added').each(function(i, container) {
 
-      $action
-        .addClass('storify-button')
-        .removeClass('pk')
-        .attr('data-tooltip', 'Storify this post')
-        .removeAttr('aria-label')
-        .click(clicked);
+          var $container = $(container)
+            , $action = $container.find('.Qba')
+            , $storify = $action.clone();
 
-      $action.find('.iq')
-        .removeClass('OG');
+          $container.addClass('storify-added');
 
-      $container
-        .addClass('storify-added')
-        .find('.Kp').after($action);
-    });
+          $storify
+            .removeClass('Qba')
+            .addClass('storify-button')
+            .attr('id', ':t')
+            .hover(function() {
+              $(this).addClass('d-A-yb');
+            }, function() {
+              $(this).removeClass('d-A-yb');
+            })
+            .click(clicked);
 
-    $('.le').not('.storify-added').each(function(i, container) {
-      var $container = $(container)
-        , $sibling = $container.find('.Gj:first')
-        , $action = $sibling.clone()
-        , $button = $action.children();
+          $storify.find('div').text('Storify post');
 
-      $container
-        .addClass('storify-added')
-        .hover(function() {
-          $action.show();
-        }, function() {
-          $action.hide();
+          $action.after($storify);
         });
-
-      $button
-        .addClass('storify-button-small')
-        .removeClass('eswd')
-        .removeAttr('id')
-        .removeAttr('g:entity')
-        .removeAttr('g:token')
-        .attr('title', 'Storify this comment')
-        .click(commentClicked);
-
-      $sibling.after($action);
+      }, 100);
     });
   }
 
@@ -134,8 +117,5 @@ sfy.fn['gplus'] = function() {
   }
 
   addButtons();
-  setInterval(function() {
-    addButtons();
-  }, 500);
 
 };
