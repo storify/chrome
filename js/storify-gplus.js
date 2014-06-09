@@ -40,11 +40,11 @@ sfy.fn['gplus'] = function() {
     
     var $target = $(e.target)
       , $container = $target.parents('.Yp')
-      , $actorName = $container.find('.Hf')
+      , $actorName = $container.find('.Hf:first')
       , $timestamp = $container.find('a.Rg')
-      , $link = $container.find('.ZE')
+      , $link = $container.find('.wI .ot-anchor')
       , $image = $container.find('img.ar')
-      , $message = $container.find('.jn');
+      , $message = $container.find('.Ct');
 
     var permalink = gplusSource.href + '/' + $timestamp.attr('href');
 
@@ -64,11 +64,10 @@ sfy.fn['gplus'] = function() {
     };
 
     if ($link.length) {
-      var title = $link.text();
       element.type = 'link';
       element.data.link = {
-          title: title.substr(0, title.length - 2)
-        , description: $container.find('.Xf').text()
+          title: $link.text()
+        , description: $message.html()
         , thumbnail: $image.attr('src')
       };
     } else if ($image.length) {
