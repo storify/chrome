@@ -1,7 +1,5 @@
 sfy.fn['gplus'] = function() {
 
-  sfy.loadCSS('css/storify-gplus.css');
-
   var gplusSource = {
       name: 'gplus'
     , href: 'http://plus.google.com'
