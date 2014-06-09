@@ -37,14 +37,14 @@ sfy.fn['gplus'] = function() {
 
   function clicked(e) {
     e.preventDefault();
-    
+
     var $target = $(e.target)
       , $container = $target.parents('.Yp')
       , $actorName = $container.find('.Hf:first')
       , $timestamp = $container.find('a.Rg')
-      , $link = $container.find('.wI .ot-anchor')
+      , $link = $container.find('.wI .ot-anchor:first')
       , $image = $container.find('img.ar')
-      , $message = $container.find('.Ct');
+      , $message = $container.find('.Ct:first');
 
     var permalink = gplusSource.href + '/' + $timestamp.attr('href');
 
@@ -78,8 +78,6 @@ sfy.fn['gplus'] = function() {
       };
     }
 
-    if (!element.data.quote.text && !element.data.image) return;
-    
     sfy.showModal(element);
   }
 
