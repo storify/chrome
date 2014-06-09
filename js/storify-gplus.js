@@ -41,11 +41,11 @@ sfy.fn['gplus'] = function() {
     e.preventDefault();
     
     var $target = $(e.target)
-      , $container = $target.parents('.Cg')
-      , $actorName = $container.find('.md')
-      , $timestamp = $container.find('.Mq')
+      , $container = $target.parents('.Yp')
+      , $actorName = $container.find('.Hf')
+      , $timestamp = $container.find('a.Rg')
       , $link = $container.find('.ZE')
-      , $image = $container.find('.Ws')
+      , $image = $container.find('img.ar')
       , $message = $container.find('.jn');
 
     var permalink = gplusSource.href + '/' + $timestamp.attr('href');
@@ -60,7 +60,7 @@ sfy.fn['gplus'] = function() {
       , attribution: {
             name: $actorName.text()
           , href: $actorName.attr('href')
-          , thumbnail: $container.find('.Xl').attr('src')
+          , thumbnail: $container.find('.Uk').attr('src')
         }
       , posted_at: new Date($timestamp.attr('title'))
     };
