@@ -1,69 +1,50 @@
 sfy.fn['gplus'] = function() {
 
-  sfy.loadCSS('css/storify-gplus.css');
-
   var gplusSource = {
       name: 'gplus'
     , href: 'http://plus.google.com'
   };
 
   function addButtons() {
-    $('.BE').not('.storify-added').each(function(i, container) {
-      var $container = $(container)
-        , $action = $container.find('.Tj:first').clone();
+    $('body').on('click','.xw', function() {
+      setTimeout(function() {
+        $('.YH').not('.storify-added').each(function(i, container) {
 
-      $action
-        .addClass('storify-button')
-        .removeClass('pk')
-        .attr('data-tooltip', 'Storify this post')
-        .removeAttr('aria-label')
-        .click(clicked);
+          var $container = $(container)
+            , $action = $container.find('.Qba')
+            , $storify = $action.clone();
 
-      $action.find('.iq')
-        .removeClass('OG');
+          $container.addClass('storify-added');
 
-      $container
-        .addClass('storify-added')
-        .find('.Kp').after($action);
-    });
+          $storify
+            .removeClass('Qba')
+            .addClass('storify-button')
+            .attr('id', ':t')
+            .hover(function() {
+              $(this).addClass('d-A-yb');
+            }, function() {
+              $(this).removeClass('d-A-yb');
+            })
+            .click(clicked);
 
-    $('.le').not('.storify-added').each(function(i, container) {
-      var $container = $(container)
-        , $sibling = $container.find('.Gj:first')
-        , $action = $sibling.clone()
-        , $button = $action.children();
+          $storify.find('div').text('Storify post');
 
-      $container
-        .addClass('storify-added')
-        .hover(function() {
-          $action.show();
-        }, function() {
-          $action.hide();
+          $action.after($storify);
         });
-
-      $button
-        .addClass('storify-button-small')
-        .removeClass('eswd')
-        .removeAttr('id')
-        .removeAttr('g:entity')
-        .removeAttr('g:token')
-        .attr('title', 'Storify this comment')
-        .click(commentClicked);
-
-      $sibling.after($action);
+      }, 100);
     });
   }
 
   function clicked(e) {
     e.preventDefault();
-    
+
     var $target = $(e.target)
-      , $container = $target.parents('.Cg')
-      , $actorName = $container.find('.md')
-      , $timestamp = $container.find('.Mq')
-      , $link = $container.find('.ZE')
-      , $image = $container.find('.Ws')
-      , $message = $container.find('.jn');
+      , $container = $target.parents('.Yp')
+      , $actorName = $container.find('.Hf:first')
+      , $timestamp = $container.find('a.Rg')
+      , $link = $container.find('.wI .ot-anchor:first')
+      , $image = $container.find('img.ar')
+      , $message = $container.find('.Ct:first');
 
     var permalink = gplusSource.href + '/' + $timestamp.attr('href');
 
@@ -77,17 +58,16 @@ sfy.fn['gplus'] = function() {
       , attribution: {
             name: $actorName.text()
           , href: $actorName.attr('href')
-          , thumbnail: $container.find('.Xl').attr('src')
+          , thumbnail: $container.find('.Uk').attr('src')
         }
       , posted_at: new Date($timestamp.attr('title'))
     };
 
     if ($link.length) {
-      var title = $link.text();
       element.type = 'link';
       element.data.link = {
-          title: title.substr(0, title.length - 2)
-        , description: $container.find('.Xf').text()
+          title: $link.text()
+        , description: $message.html()
         , thumbnail: $image.attr('src')
       };
     } else if ($image.length) {
@@ -98,8 +78,6 @@ sfy.fn['gplus'] = function() {
       };
     }
 
-    if (!element.data.quote.text && !element.data.image) return;
-    
     sfy.showModal(element);
   }
 
@@ -134,8 +112,5 @@ sfy.fn['gplus'] = function() {
   }
 
   addButtons();
-  setInterval(function() {
-    addButtons();
-  }, 500);
 
 };
