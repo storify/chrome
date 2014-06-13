@@ -34,16 +34,11 @@ sfy.fn['facebook'] = {
     });
   },
 
-  storifyThisPost: function() {
+  storifyComment: function() {
     var $target = $(sfy.lastElementClicked.target);
-    // check to see if it's a comment
-    if ($target.parents('.UFIComment').length > 0) {
-      // if so, storify the comment, not the post
+    if ($target.find('.UFIComment').length > 0) {
       return this.commentClicked($target);
     }
-
-    // otherwise, comment the post itself
-    return this.storifyThisDomElement($target);
   },
 
   commentClicked: function ($target) {
