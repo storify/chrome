@@ -41,7 +41,7 @@ sfy.fn['facebook'] = {
     //AM: watch out for these classes names
     var $container = $target.parents('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
-      , $message = $container.find('.UFICommentContent').children().not('.UFICommentActorName, :has(.uiStreamAttachments)')
+      , $message = $container.find('.UFICommentBody').children()
       , $actorName = $container.find('.UFICommentActorName')
       , $image = $container.find('.uiMediaThumb img').first()
       , permalink = $timestamp.attr('href')
