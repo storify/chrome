@@ -1,8 +1,4 @@
 sfy.fn['facebook'] = {
-  facebookSource: {
-      name: 'facebook'
-    , href: 'http://www.facebook.com'
-  },
 
   addButtons: function() {
     var self = this;
@@ -36,7 +32,7 @@ sfy.fn['facebook'] = {
 
   storifyComment: function() {
     var $target = $(sfy.lastElementClicked.target);
-    if ($target.find('.UFIComment').length > 0) {
+    if ($target.closest('.UFIComment').length > 0) {
       return this.commentClicked($target);
     }
   },
@@ -52,7 +48,7 @@ sfy.fn['facebook'] = {
       , message = $message.text();
 
     if (permalink && !permalink.match('www.facebook.com')) {
-      permalink = this.facebookSource.href + permalink;
+      permalink = 'http://www.facebook.com' + permalink;
     }
 
     var element = {
@@ -61,7 +57,7 @@ sfy.fn['facebook'] = {
             quote: { text: message }
         }
       , permalink: permalink
-      , source: this.facebookSource
+      , source: 'facebook.com'
       , attribution: {
             name: $actorName.text()
           , href: $actorName.attr('href')
