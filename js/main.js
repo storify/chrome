@@ -68,7 +68,7 @@ function clog(msg) {
 //   clog(request.event);
 // });
 
-function storifyThisComment(info,tab){  
+function storifyThisYoutubeComment(info,tab){
   chrome.tabs.executeScript(null,{
     // code: 'sfy.fn["youtube"].test();'
     code: 'sfy.fn["youtube"].storifyComment(sfy.lastElementClicked);'
@@ -76,11 +76,9 @@ function storifyThisComment(info,tab){
   return;
 };
 
-function storifyThisPost(info, tab) {
-  // clog("storifyThisPost ", lastElementClicked);
-
+function storifyThisFacebookComment(info, tab) {
   chrome.tabs.executeScript(null, {
-    code: 'sfy.fn["facebook"].storifyThisPost();'
+    code: 'sfy.fn["facebook"].storifyComment();'
   });
   return;
 
@@ -121,9 +119,9 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
-  'title':    'Storify This Post',
+  'title':    'Storify This Comment',
   'contexts': ['all'],
-  'onclick':  storifyThisPost,
+  'onclick':  storifyThisFacebookComment,
   'documentUrlPatterns': ['*://*.facebook.com/*']
 });
 
@@ -131,7 +129,7 @@ chrome.contextMenus.create({
 chrome.contextMenus.create({
   'title':    'Storify This Comment',
   'contexts': ['all'],
-  'onclick':  storifyThisComment,
+  'onclick':  storifyThisYoutubeComment,
   'documentUrlPatterns': ['*://*.youtube.com/*']
 });
 

@@ -1,8 +1,4 @@
 sfy.fn['facebook'] = {
-  facebookSource: {
-      name: 'facebook'
-    , href: 'http://www.facebook.com'
-  },
 
   addButtons: function() {
     var self = this;
@@ -34,30 +30,25 @@ sfy.fn['facebook'] = {
     });
   },
 
-  storifyThisPost: function() {
+  storifyComment: function() {
     var $target = $(sfy.lastElementClicked.target);
-    // check to see if it's a comment
-    if ($target.parents('.UFIComment').length > 0) {
-      // if so, storify the comment, not the post
+    if ($target.closest('.UFIComment').length > 0) {
       return this.commentClicked($target);
     }
-
-    // otherwise, comment the post itself
-    return this.storifyThisDomElement($target);
   },
 
   commentClicked: function ($target) {
     //AM: watch out for these classes names
     var $container = $target.parents('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
-      , $message = $container.find('.UFICommentContent').children().not('.UFICommentActorName, :has(.uiStreamAttachments)')
+      , $message = $container.find('.UFICommentBody').children()
       , $actorName = $container.find('.UFICommentActorName')
       , $image = $container.find('.uiMediaThumb img').first()
       , permalink = $timestamp.attr('href')
       , message = $message.text();
 
     if (permalink && !permalink.match('www.facebook.com')) {
-      permalink = this.facebookSource.href + permalink;
+      permalink = 'http://www.facebook.com' + permalink;
     }
 
     var element = {
@@ -66,7 +57,7 @@ sfy.fn['facebook'] = {
             quote: { text: message }
         }
       , permalink: permalink
-      , source: this.facebookSource
+      , source: 'facebook.com'
       , attribution: {
             name: $actorName.text()
           , href: $actorName.attr('href')
