@@ -38,12 +38,11 @@ sfy.fn['facebook'] = {
   },
 
   commentClicked: function ($target) {
-    //AM: watch out for these classes names
-    var $container = $target.parents('.UFIComment')
+    var $container = $target.closest('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
       , $message = $container.find('.UFICommentBody').children()
       , $actorName = $container.find('.UFICommentActorName')
-      , $image = $container.find('.uiMediaThumb img').first()
+      , $image = $container.find('.UFICommentContent img').first()
       , permalink = $timestamp.attr('href')
       , message = $message.text();
 
@@ -70,12 +69,12 @@ sfy.fn['facebook'] = {
     if ($image.length) {
       element.type = 'image';
       element.data.image = {
-          src: $image.attr('src').replace('/p160x160', '')
+          src: $image.attr('src')
         , caption: message
       };
     }
 
-    if (!element.permalink || !element.data.quote.text) {
+    if (!element.permalink || (!element.data.quote.text && !element.data.image)) {
       return;
     }
 
