@@ -74,7 +74,7 @@ sfy.fn['facebook'] = {
       };
     }
 
-    if (!element.permalink || !element.data.quote.text) {
+    if (!element.permalink || (!element.data.quote.text && !element.data.image)) {
       return;
     }
 
