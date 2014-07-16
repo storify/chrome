@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   border: none;
-  z-index: 3000000000;
+  z-index: 2000000000;
 }
 
 .storify-spinner {
