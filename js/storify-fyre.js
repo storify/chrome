@@ -17,7 +17,7 @@
       "item": ".fyre-comment-article",
       //after what element we inject storify comment link
       "itemAfter": ".fyre-share-link",
-      'itemText': '.fyre-comment-wrapper p:first',
+      'itemText': '.fyre-comment-wrapper p:first p',
       'itemAuthorName': '.fyre-comment-username',
       'itemAuthorAvatar': '.fyre-user-avatar'
 
@@ -85,7 +85,7 @@
       e.preventDefault();
       var item = $(e.srcElement).parents(mapping.item);
       // console.log(item.find(mapping.itemText))
-      var message = item.find(mapping.itemText).first().text();
+      var message = item.find(mapping.itemText).text();
       var id = item.data('message-id');
 
       var permalink = window.location.href + '#lf_comment=' + id;
