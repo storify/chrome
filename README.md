@@ -56,4 +56,4 @@ Fork at it.
 License
 -----
 
-MIT
+[MIT](http://opensource.org/licenses/MIT)
