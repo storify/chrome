@@ -1,8 +1,9 @@
-.storify-button .icon {
-  margin-top: -1px;
-}
-
-.storify-button:hover {
-  text-decoration: underline;
-  cursor: pointer;
+button.storifycon-logo {
+  height: 44px;
+  width: 44px;
+  font-size: 25px;
+  line-height: 12px;
+  color: transparent;
+  -webkit-text-stroke: 1px #9A9E9E;
+  outline: none;
 }
