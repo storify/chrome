@@ -35,26 +35,61 @@ var sfy = {
         , width: 5
         , radius: 20
         , hwaccel: true
-        , color: '#fff'
+        , color: 'white'
       });
     }
+    
+    var url = sfy.storifyUrl + '/import?' +
+      'utm_source=' + options.utm_source +
+      '&utm_medium=' + options.utm_medium +
+      '&utm_content=' + options.utm_content +
+      '&utm_campaign=storify-action' +
+      '&element=' + encodeURIComponent(JSON.stringify(element));
 
+    /*
+     * Because of this chrome bug: https://code.google.com/p/chromium/issues/detail?id=408932
+     * we cannot load Storify's import page directly on pages with a strict Content Security
+     * Policy (e.g. Twitter, Facebook). So we work around it by loading a local iframe, which
+     * loads another iframe inside (inception!).
+     */
     sfy.modal = $('<iframe>');
     sfy.modal
-      .attr('src', sfy.storifyUrl + '/import?utm_source='+options.utm_source+'&utm_medium='+options.utm_medium+'&utm_content='+options.utm_content+'&utm_campaign=storify-action&element=' + encodeURIComponent(JSON.stringify(element)))
+      .attr('src', sfy.getURL('iframe.html'))
       .attr('id', 'storify_overlay')
       .attr('allowtransparency', true)
-      // .attr('scrolling', 'no')
       .css({ visibility: 'hidden' })
       .appendTo('body');
-
+          
     sfy.modal.load(function(e) {
-      sfy.modal.css({ visibility: 'visible' });
-      sfy.loading = false;
-      if ($.fn.spin) {
-        $('body').spin(false);
-      }
-      overlay.remove();
+      var win = sfy.modal[0].contentWindow;
+      var doc = win.document;
+            
+      var iframe = doc.createElement('iframe');
+      iframe.setAttribute('src', url);
+      iframe.setAttribute('allowtransparency', true);
+      iframe.setAttribute('id', 'storify_overlay');
+      doc.body.appendChild(iframe);
+      
+      win.onmessage = function(message) {
+        try {
+          var data = JSON.parse(message.data);
+        } catch(e) { return; }
+        
+        switch (data.method) {
+          case 'close':
+            sfy.closeModal();
+            break;
+            
+          case 'load':
+            sfy.modal.css({ visibility: 'visible' });
+            sfy.loading = false;
+            if ($.fn.spin) {
+              $('body').spin(false);
+            }
+            overlay.remove();
+            break;
+        }
+      };
     });
 
     return sfy.modal;
@@ -86,13 +121,3 @@ var downHandler = function(e) {
 };
 
 $(document).mousedown( downHandler );
-
-$.receiveMessage(function(message) {
-  try {
-    var data = JSON.parse(message.data);
-  } catch(e) { return; }
-
-  switch (data.method) {
-    case 'close': return sfy.closeModal();
-  }
-});

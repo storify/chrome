@@ -56,7 +56,8 @@
     "js/storify-youtube.js",
     "js/storify-fyre.js",
     "js/storify-disqus.js",
-    "js/load.js"
+    "js/load.js",
+    "iframe.html"
   ],
   "content_scripts": [
     {

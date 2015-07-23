@@ -11,6 +11,8 @@
 
 .storify-spinner {
   position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
 }
 
 #storify-notification {
