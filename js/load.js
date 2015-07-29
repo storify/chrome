@@ -12,7 +12,7 @@ var services = {
     facebook: /https?:\/\/(.*)\.?facebook\.com/
   , flickr: /https?:\/\/(.*)\.?flickr\.com/
   , gplus: /https?:\/\/plus\.google\.com/
-  , instagram: /https?:\/\/(.*)\.?(instagr\.am|instagram.com)\/p/
+  , instagram: /https?:\/\/(.*)\.?(instagr\.am|instagram.com)/
   , reddit: /https?:\/\/(.*)\.?reddit\.com/
   , twitter: /https?:\/\/(.*)\.?twitter\.com/
   , pinterest: /https?:\/\/(.*)\.?pinterest\.com/
@@ -35,7 +35,7 @@ $('body').attr('storify-loaded', 'true');
 
 sfy.loadCSS('css/storify-common.css');
 
-if (!onStorify && service && service !== 'facebook') {
+if (!onStorify && service) {
   // console.log(sfy.fn);
   sfy.fn[service]();
 }

@@ -1,43 +1,92 @@
-sfy.fn['facebook'] = {
+sfy.fn['facebook'] = function() {
+  
+  sfy.loadCSS('css/storifycons.css');
+  sfy.loadCSS('css/storify-facebook.css');
 
-  addButtons: function() {
+  function addButtons() {
     var self = this;
-    $('#content').on('click','a[aria-haspopup="true"]', function() {
-      setTimeout(function() {
-        $('._54nc').not('.storify-added').each(function() {
-          $(this).addClass('storify-added');
-
-          var postUrl = $(this).attr('ajaxify') && $(this).attr('ajaxify').match(/url=([^&]*)/);
-          if (postUrl && postUrl.length > 0) {
-            var permalink = decodeURIComponent(postUrl[1]);
-            if (!permalink.match(/^https:\/\/www\.facebook\.com/)) {
-              permalink = 'https://www.facebook.com' + permalink;
-            }
-          } else {
-            return;
-          }
-
-          var li = $(this).parent('li');
-          var clone = $(li).clone();
-          $(clone)
-            .hover(function() { $(this).addClass("_54ne selected") }, function() { $(this).removeClass("_54ne selected") })
-            .find('a').removeAttr('ajaxify').click(function() { sfy.showModal({permalink: permalink}); })
-            .find('span').text('Storify');
-
-          $(li).after(clone);
-        });
-      }, 100);
+    
+    // Main feed items
+    $('.userContentWrapper:not(.storify-added)').each(function() {
+      // userContentWrappers can be nested, so we check if we already added a storify button
+      var buttons = $(this).find('.comment_link').closest('div');
+      if (buttons.hasClass('storify-added'))
+        return;
+      
+      $(this).addClass('storify-added');
+      buttons.addClass('storify-added');
+      
+      var permalink = $(this).find('a abbr[data-utime]').parent().attr('href');
+      if (permalink && permalink.length > 0) {
+        if (!/^https?:\/\/(www\.)?facebook\.com/.test(permalink)) {
+          permalink = 'https://www.facebook.com' + permalink;
+        }
+      } else {
+        return;
+      }
+      
+      var span = $('<span>');
+      span.html('<a href="#"><i class="storifycon-logo"></i><span>Storify</span></a>');
+      span.find('a').click(function() {
+        sfy.showModal({ permalink: permalink });
+      });
+      
+      buttons.append(' &nbsp; ');
+      buttons.append(span);
     });
-  },
+    
+    // Item detail popup or photo page
+    $('.UIActionLinks:not(.storify-added)').each(function() {
+      $(this).addClass('storify-added');
+      
+      var permalink = $(this).parents('form').find('a abbr[data-utime]').parent().attr('href');
+      if (permalink && permalink.length > 0) {
+        if (!permalink.match(/^https:\/\/www\.facebook\.com/)) {
+          permalink = 'https://www.facebook.com' + permalink;
+        }
+      } else {
+        return;
+      }
+      
+      var a = $('<a>')
+        .attr('href', '#')
+        .text('Storify')
+        .click(function() {
+          sfy.showModal({ permalink: permalink });
+        });
+        
+      var lastButton = $(this).children(':not(#fbPhotoPageTimestamp)').last();
+      
+      lastButton.after(a);
+      lastButton.after(' · ');
+    });
+    
+    // Comments
+    $('.UFICommentActions:not(.storify-added)').each(function() {
+      $(this).addClass('storify-added');
+      
+      var a = $('<a>')
+        .attr('href', '#')
+        .text('Storify')
+        .click(function() {
+          commentClicked($(this));
+        });
+        
+      var lastButton = $(this).children('.UFIReplyLink');
+        
+      lastButton.after(a);
+      lastButton.after(' · ');
+    });
+  }
 
-  storifyComment: function() {
+  sfy.fn['facebook'].storifyComment = function() {
     var $target = $(sfy.lastElementClicked.target);
     if ($target.closest('.UFIComment').length > 0) {
-      return this.commentClicked($target);
+      return commentClicked($target);
     }
-  },
+  };
 
-  commentClicked: function ($target) {
+  function commentClicked($target) {
     var $container = $target.closest('.UFIComment')
       , $timestamp = $container.find('.uiLinkSubtle')
       , $message = $container.find('.UFICommentBody').children()
@@ -79,9 +128,11 @@ sfy.fn['facebook'] = {
     }
 
     sfy.showModal(element);
-  }};
-
-setTimeout(function() {
-  sfy.fn['facebook'].addButtons();
-}, 1000);
+  }
   
+  addButtons();
+  setInterval(function() {
+    addButtons();
+  }, 500);
+  
+};

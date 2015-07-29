@@ -28,6 +28,7 @@
     "css/storify-pinterest.css",
     "css/storify-topsy.css",
     "css/storify-youtube.css",
+    "css/storify-facebook.css",
     "css/storifycons.css",
     "fonts/storifycons.eot",
     "fonts/storifycons.svg",
@@ -56,7 +57,8 @@
     "js/storify-youtube.js",
     "js/storify-fyre.js",
     "js/storify-disqus.js",
-    "js/load.js"
+    "js/load.js",
+    "iframe.html"
   ],
   "content_scripts": [
     {
