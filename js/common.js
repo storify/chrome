@@ -39,6 +39,11 @@ var sfy = {
       });
     }
     
+    var body = $('body');
+    body
+      .data('sfy-overflow', body.css('overflow'))
+      .css('overflow', 'hidden');
+    
     var url = sfy.storifyUrl + '/import?' +
       'utm_source=' + options.utm_source +
       '&utm_medium=' + options.utm_medium +
@@ -100,6 +105,9 @@ var sfy = {
       sfy.modal.remove();
       sfy.modal = null;
     }
+    
+    var body = $('body');
+    body.css('overflow', body.data('sfy-overflow'));
   },
 
   loadCSS: function(path) {
