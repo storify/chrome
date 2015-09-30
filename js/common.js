@@ -59,43 +59,36 @@ var sfy = {
      */
     sfy.modal = $('<iframe>');
     sfy.modal
-      .attr('src', sfy.getURL('iframe.html'))
+      .attr('src', sfy.getURL('iframe.html#' + url))
       .attr('id', 'storify_overlay')
       .attr('allowtransparency', true)
       .css({ visibility: 'hidden' })
       .appendTo('body');
-          
-    sfy.modal.load(function(e) {
-      var win = sfy.modal[0].contentWindow;
-      var doc = win.document;
-            
-      var iframe = doc.createElement('iframe');
-      iframe.setAttribute('src', url);
-      iframe.setAttribute('allowtransparency', true);
-      iframe.setAttribute('id', 'storify_overlay');
-      doc.body.appendChild(iframe);
       
-      win.onmessage = function(message) {
-        try {
-          var data = JSON.parse(message.data);
-        } catch(e) { return; }
-        
-        switch (data.method) {
-          case 'close':
-            sfy.closeModal();
-            break;
-            
-          case 'load':
-            sfy.modal.css({ visibility: 'visible' });
-            sfy.loading = false;
-            if ($.fn.spin) {
-              $('body').spin(false);
-            }
-            overlay.remove();
-            break;
-        }
-      };
-    });
+    window.addEventListener('message', function(message) {
+      if (!/^chrome-extension/.test(message.origin))
+        return;
+      
+      try {
+        var data = JSON.parse(message.data);
+      } catch(e) { return; }
+
+      switch (data.method) {
+        case 'close':
+          window.removeEventListener('message', arguments.callee, false);
+          sfy.closeModal();
+          break;
+
+        case 'load':
+          sfy.modal.css({ visibility: 'visible' });
+          sfy.loading = false;
+          if ($.fn.spin) {
+            $('body').spin(false);
+          }
+          overlay.remove();
+          break;
+      }
+    }, false);
 
     return sfy.modal;
   },
